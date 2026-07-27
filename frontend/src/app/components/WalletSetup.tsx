@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Check, Search, Plus, CreditCard, Loader2 } from "lucide-react";
+import { API_BASE_URL } from "../lib/api";
 
 export default function WalletSetup({ onComplete }: { onComplete: () => void }) {
   const [cards, setCards] = useState<any[]>([]);
@@ -12,7 +13,7 @@ export default function WalletSetup({ onComplete }: { onComplete: () => void }) 
   const [addingCustom, setAddingCustom] = useState(false);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/api/cards")
+    fetch(`${API_BASE_URL}/api/cards`)
       .then(res => res.json())
       .then(data => {
         setCards(data);
@@ -33,7 +34,7 @@ export default function WalletSetup({ onComplete }: { onComplete: () => void }) 
   const handleAddCustom = async () => {
     setAddingCustom(true);
     try {
-      const res = await fetch("http://127.0.0.1:8000/api/cards/custom", {
+      const res = await fetch(`${API_BASE_URL}/api/cards/custom`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name: search })
@@ -51,7 +52,7 @@ export default function WalletSetup({ onComplete }: { onComplete: () => void }) 
   const handleFinish = async () => {
     setSaving(true);
     try {
-      await fetch("http://127.0.0.1:8000/api/users/1/wallet", {
+      await fetch(`${API_BASE_URL}/api/users/1/wallet`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ card_ids: Array.from(selectedCards) })

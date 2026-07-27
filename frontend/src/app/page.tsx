@@ -9,6 +9,7 @@ import ActionableIntelligence from './components/ActionableIntelligence';
 import FinancialTimeline from './components/FinancialTimeline';
 import ScenarioSimulator from './components/ScenarioSimulator';
 import SmartWallet from './components/SmartWallet';
+import { API_BASE_URL } from './lib/api';
 
 export default function Home() {
   const [flowState, setFlowState] = useState<"onboarding" | "wallet" | "dashboard">("onboarding");
@@ -24,7 +25,7 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    fetch('http://127.0.0.1:8000/api/users/1/wallet')
+    fetch(`${API_BASE_URL}/api/users/1/wallet`)
       .then(res => res.json())
       .then(data => {
         setWallet(data || []);

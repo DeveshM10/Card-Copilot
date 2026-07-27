@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Calculator, X, TrendingUp, Award, Activity } from "lucide-react";
+import { API_BASE_URL } from "../lib/api";
 
 export default function ScenarioSimulator() {
   const [isOpen, setIsOpen] = useState(false);
@@ -11,7 +12,7 @@ export default function ScenarioSimulator() {
   const handleSimulate = async () => {
     setLoading(true);
     try {
-      const res = await fetch("http://127.0.0.1:8000/api/simulate", {
+      const res = await fetch(`${API_BASE_URL}/api/simulate`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ user_id: 1, category, amount }),

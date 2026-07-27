@@ -2,13 +2,14 @@
 
 import { useState, useEffect } from "react";
 import { CheckCircle2, Zap, Trophy, PlaneTakeoff, Bell, ArrowRight, Loader2 } from "lucide-react";
+import { API_BASE_URL } from "../lib/api";
 
 export default function FinancialTimeline() {
   const [feedItems, setFeedItems] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/api/users/1/feed")
+    fetch(`${API_BASE_URL}/api/users/1/feed`)
       .then(res => res.json())
       .then(data => {
         if (data.items) {

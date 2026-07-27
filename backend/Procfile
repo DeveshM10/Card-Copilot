@@ -1,0 +1,1 @@
+web: python seed_db.py && python seed_india_cards.py && python seed_neobank_cards.py && uvicorn main:app --host 0.0.0.0 --port $PORT

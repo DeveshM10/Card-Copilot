@@ -18,11 +18,13 @@ app = FastAPI(
     version="0.1.0",
 )
 
-# Configure CORS for Next.js frontend
+# Configure CORS. The app has no cookie-based auth (no credentials are sent),
+# so a permissive origin list is safe here and avoids needing to know the
+# deployed frontend's exact domain in advance.
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
-    allow_credentials=True,
+    allow_origins=["*"],
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -168,5 +170,6 @@ def get_user_feed(user_id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=500, detail=str(e))
 
 if __name__ == "__main__":
+    import os
     import uvicorn
-    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run("main:app", host="0.0.0.0", port=int(os.environ.get("PORT", 8000)))

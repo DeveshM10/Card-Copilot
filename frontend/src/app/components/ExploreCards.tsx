@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { CreditCard, X, Landmark } from "lucide-react";
+import { API_BASE_URL } from "../lib/api";
 
 interface Offer {
   id: number;
@@ -30,7 +31,7 @@ export default function ExploreCards() {
   const [selectedCard, setSelectedCard] = useState<Card | null>(null);
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/cards")
+    fetch(`${API_BASE_URL}/api/cards`)
       .then((res) => res.json())
       .then((data) => {
         setCards(data);

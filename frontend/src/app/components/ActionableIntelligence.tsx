@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Loader2 } from "lucide-react";
+import { API_BASE_URL } from "../lib/api";
 
 interface Recommendation {
   category: string;
@@ -35,7 +36,7 @@ export default function ActionableIntelligence() {
     let cancelled = false;
 
     async function loadRecommendations() {
-      const wallet = await fetch("http://127.0.0.1:8000/api/users/1/wallet")
+      const wallet = await fetch(`${API_BASE_URL}/api/users/1/wallet`)
         .then((res) => res.json())
         .catch(() => []);
 
@@ -47,7 +48,7 @@ export default function ActionableIntelligence() {
         return;
       }
 
-      const persona = await fetch("http://127.0.0.1:8000/api/users/1")
+      const persona = await fetch(`${API_BASE_URL}/api/users/1`)
         .then((res) => res.json())
         .catch(() => null);
 
@@ -60,7 +61,7 @@ export default function ActionableIntelligence() {
 
       const results = await Promise.all(
         categories.map((category) =>
-          fetch("http://127.0.0.1:8000/api/simulate", {
+          fetch(`${API_BASE_URL}/api/simulate`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({

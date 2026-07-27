@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { ChevronDown, CheckCircle2, Sparkles } from "lucide-react";
+import { API_BASE_URL } from "../lib/api";
 
 interface Offer {
   id: number;
@@ -30,7 +31,7 @@ export default function SmartWallet({ wallet, loading }: WalletProps) {
   const [topCategories, setTopCategories] = useState<string[]>([]);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/api/users/1")
+    fetch(`${API_BASE_URL}/api/users/1`)
       .then((res) => res.json())
       .then((data) => {
         const cats = (data?.high_freq_categories || "")

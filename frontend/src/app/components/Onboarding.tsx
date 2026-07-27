@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Plane, ShieldCheck, CreditCard, Check } from "lucide-react";
+import { API_BASE_URL } from "../lib/api";
 
 type Profile = {
   age_group: string;
@@ -87,7 +88,7 @@ export default function Onboarding({ onComplete }: { onComplete: () => void }) {
   const finishOnboarding = async () => {
     setSaving(true);
     try {
-      await fetch("http://127.0.0.1:8000/api/users/1", {
+      await fetch(`${API_BASE_URL}/api/users/1`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(profile),

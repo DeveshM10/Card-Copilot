@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { API_BASE_URL } from "../lib/api";
 
 export default function ChatBox() {
   const [messages, setMessages] = useState<{ role: "user" | "assistant"; content: string }[]>([
@@ -18,7 +19,7 @@ export default function ChatBox() {
     setLoading(true);
 
     try {
-      const res = await fetch("http://localhost:8000/api/chat", {
+      const res = await fetch(`${API_BASE_URL}/api/chat`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ user_id: 1, query: userQuery }),

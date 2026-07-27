@@ -1,0 +1,59 @@
+@import "tailwindcss";
+
+@theme inline {
+  /* Warm ink ground, not pure black — and a gold accent instead of the generic blue/purple pair */
+  --color-background: #0d0c0a;
+  --color-foreground: #f2efe9;
+  --color-muted: #948d80;
+
+  --color-primary: #c9a24d; /* Antique gold */
+  --color-primary-hover: #dab566;
+
+  --color-accent: #c9a24d;
+  --color-positive: #34d399; /* Emerald — reserved for savings/active-offer signals */
+  --color-warning: #e0895a; /* Warm amber-red — reserved for urgency/expiry */
+
+  --color-surface: rgba(255, 255, 255, 0.03);
+  --color-surface-hover: rgba(255, 255, 255, 0.08);
+  --color-border: rgba(201, 162, 77, 0.14);
+
+  --font-sans: var(--font-geist-sans), ui-sans-serif, sans-serif;
+  --font-mono: var(--font-geist-mono), monospace;
+  --font-display: var(--font-display), ui-serif, serif;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  /* A single restrained warm glow, not competing color blobs */
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(201, 162, 77, 0.06), transparent 35%),
+    radial-gradient(circle at 90% 80%, rgba(52, 211, 153, 0.04), transparent 30%);
+}
+
+/* Glassmorphism Utilities */
+@layer utilities {
+  .glass-panel {
+    @apply bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl shadow-xl;
+  }
+
+  .glass-button {
+    @apply bg-white/10 hover:bg-white/15 backdrop-blur-md border border-white/10 rounded-xl transition-all duration-300;
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-[#dab566] to-[#c9a24d];
+  }
+
+  .font-display {
+    font-family: var(--font-display);
+  }
+}

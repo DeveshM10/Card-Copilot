@@ -1,0 +1,13 @@
+# Backend (Python)
+backend/venv/
+backend/__pycache__/
+backend/.env
+backend/*.db
+backend/*.db-shm
+backend/*.db-wal
+backend/checkpoints.db
+*.pyc
+
+# OS
+.DS_Store
+Thumbs.db
